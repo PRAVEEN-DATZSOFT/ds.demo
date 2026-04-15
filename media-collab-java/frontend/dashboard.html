@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Collab - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl tracking-tight">MediaCollab</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="userNameDisplay" class="text-sm font-medium text-gray-300"></span>
+                    
+                    <!-- Notification Bell -->
+                    <div class="relative">
+                        <button id="bellBtn" class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            <span id="notifBadge" class="hidden absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">0</span>
+                        </button>
+                        
+                        <!-- Dropdown -->
+                        <div id="notifDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                            <div class="p-3 border-b flex justify-between">
+                                <span class="text-sm font-bold text-gray-700">Notifications</span>
+                                <button onclick="markAllNotificationsRead()" class="text-xs text-blue-600">Mark all read</button>
+                            </div>
+                            <div id="notifList" class="max-h-64 overflow-y-auto"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="logout()" class="text-sm bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">Media Library</h1>
+            <a href="media-upload.html" id="uploadBtn" class="hidden bg-blue-600 px-4 py-2 text-white rounded hover:bg-blue-700">Upload Media</a>
+        </div>
+
+        <div id="mediaGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initDashboard();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Collab - Media Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="max-w-7xl mx-auto flex justify-between">
+            <span class="font-bold text-xl">MediaCollab</span>
+            <a href="dashboard.html" class="text-sm underline">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8 px-4">
+        <div class="lg:col-span-2 bg-white rounded-xl shadow p-6">
+            <div class="flex justify-between">
+                <h1 id="mediaTitle" class="text-2xl font-bold mb-4"></h1>
+                <span id="mediaStatus" class="px-3 py-1 rounded-full text-xs font-bold h-6"></span>
+            </div>
+            <div id="mediaViewer" class="bg-gray-100 rounded flex justify-center items-center min-h-64 mb-4"></div>
+            <p id="mediaDesc" class="text-gray-700"></p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 flex flex-col h-[600px]">
+            <h2 class="text-lg font-bold border-b pb-2 mb-4">Comments</h2>
+            <div id="commentsList" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2"></div>
+            
+            <form id="commentForm" class="mt-auto">
+                <textarea id="commentInput" required class="w-full border p-2 rounded resize-none h-20" placeholder="Add a comment..."></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded mt-2 hover:bg-blue-700">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mediaId = urlParams.get('id');
+            if(mediaId) {
+                loadMediaDetails(mediaId);
+            }
+            document.getElementById('commentForm').addEventListener('submit', (e) => handleCommentSubmit(e, mediaId));
+        });
+    </script>
+</body>
+</html>
